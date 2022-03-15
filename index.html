@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Mentor | Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script async src="https://unpkg.com/alpinejs@3.9.1/dist/cdn.min.js"></script>
+    <script src="/projects.js" defer></script>
+</head>
+
+<body x-data="site">
+    <section class="has-background-dark">
+        <div class="container py-3">
+            <div class="columns">
+                <div class="column">
+                    <input type="text" class="input mb-0" placeholder="Search" x-model="search">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="title is-size-1 has-text-grey-light has-text-centered"  x-show="filteredProjects.length < 1">no results available</div>
+            <div class="columns multiline" x-show="filteredProjects.length > 0">
+                <template x-for="project in filteredProjects">
+                    <div class="column is-one-third">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-4by3">
+                                    <a :href="project.link">
+                                        <img x-bind:src="project.image" alt="Placeholder image">
+                                    </a>
+                                </figure>
+                            </div>
+
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-content">
+                                        <p class="title is-4" x-text="project.name"></p>
+                                    </div>
+                                </div>
+
+                                <div class="content">
+                                    <div class="tags">
+                                        <template x-for="tag in project.tags">
+                                            <span class="tag is-black" x-text="tag"></span>
+                                        </template>
+                                    </div>
+                                    <p x-text="project.description"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
